@@ -7,7 +7,7 @@ ob_start();
 ?>
     <section>
 
-        <h2>Liste des chapitres</h2>
+        <h2 id="chapters">Liste des chapitres</h2>
     
         <div id="articles-container">
 <?php
@@ -22,7 +22,7 @@ ob_start();
             <p><?= substr(nl2br(htmlspecialchars($data['content'])), 0, 700) ?> ...</p>
 
             <div class="read-more">
-                <a href="index.php?action=post&id=<?= $data['id'] ?>" title="<?= htmlspecialchars($data['title']) ?>">Lire la suite</a>
+                <a href="index.php?action=post&id=<?= $data['id'] ?>#chapter-content" title="<?= htmlspecialchars($data['title']) ?>">Lire la suite</a>
             </div>
 
         </article>
