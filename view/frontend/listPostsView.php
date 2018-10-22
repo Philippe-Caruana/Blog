@@ -5,10 +5,11 @@ $title = "Jean Forteroche : Billet simple pour l'Alaska";
 ob_start();
     
 ?>
+    <section>
 
-    <h2>Liste des chapitres</h2>
+        <h2>Liste des chapitres</h2>
     
-    <div id="articles-container">
+        <div id="articles-container">
 <?php
     
     while ($data = $posts->fetch())
@@ -33,7 +34,9 @@ $posts->closeCursor();
 
 ?>
 
-    </div>
+        </div>
+
+    </section>
 
 <?php
 

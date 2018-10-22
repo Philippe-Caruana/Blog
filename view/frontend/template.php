@@ -66,11 +66,7 @@
 				<img src="public/images/talkeetna.jpg" alt="Talkeetna | Alaska">
 			</div>
 
-       		<section>
-
-       			<?= $content ?>
-
-       		</section>
+       		<?= $content ?>
 			
 			<footer>
 			
