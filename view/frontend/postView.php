@@ -6,7 +6,11 @@ ob_start();
 
 ?>
 
-<p><a href="/">Retour à la liste des chapitres</a></p>
+<p id="chapter-content" class="backlink">
+
+    <a href="index.php#chapters">Retour à la liste des chapitres</a>
+
+</p>
 
 <article>
 

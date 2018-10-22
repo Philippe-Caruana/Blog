@@ -15,7 +15,7 @@ ob_start();
     while ($data = $posts->fetch())
     {
 ?>
-        <article>
+        <article class="chapter">
 
             <h3><?= htmlspecialchars($data['title']) ?> le <?= $data['creation_date_fr'] ?></h3>
             
