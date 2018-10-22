@@ -16,6 +16,28 @@ ob_start();
 
 </article>
 
+<section id="comments">
+
+    <h3>Commentaires</h3>
+
+    <?php
+
+        while($comment = $comments->fetch())
+        {
+    ?>  
+            <div class="frame">
+
+                <p><?= '<b>' . htmlspecialchars($comment['author']) . '</b>, le ' . htmlspecialchars($comment['publish_date_fr']); ?></p>
+
+                <p><?= htmlspecialchars($comment['comment']) ?></p>
+
+            </div>
+    <?php
+        }
+    ?>
+    
+</section>
+
 <?php
 
     $content = ob_get_clean();
