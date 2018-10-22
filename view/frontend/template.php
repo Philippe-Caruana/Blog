@@ -39,17 +39,17 @@
 						</li>
 						<li>
 							<i class="fas fa-home"></i>
-							<a href="#slider">Accueil</a>
+							<a href="/">Accueil</a>
 						</li>
 
 						<li>
 							<i class="fas fa-user"></i>
-							<a href="#carte-stations">À propos</a>
+							<a href="">À propos</a>
 						</li>
 
 						<li>
 							<i class="fas fa-sign-in-alt"></i>
-							<a href="#">Se connecter</a>
+							<a href="">Se connecter</a>
 						</li>
 					</ul>
 
