@@ -21,7 +21,7 @@ ob_start();
             <p><?= substr(nl2br(htmlspecialchars($data['content'])), 0, 700) ?> ...</p>
 
             <div class="read-more">
-                <a href="#" title="<?= htmlspecialchars($data['title']) ?>">Lire la suite</a>
+                <a href="index.php?action=post&id=<?= $data['id'] ?>" title="<?= htmlspecialchars($data['title']) ?>">Lire la suite</a>
             </div>
 
         </article>
