@@ -17,12 +17,12 @@ ob_start();
 ?>
         <article class="chapter">
 
-            <h3><?= htmlspecialchars($data['title']) ?> le <?= $data['creation_date_fr'] ?></h3>
+            <h3><?= htmlspecialchars($data->title) ?> le <?= $data->creation_date_fr ?></h3>
             
-            <p><?= substr(nl2br(htmlspecialchars($data['content'])), 0, 700) ?> ...</p>
+            <p><?= substr(nl2br(htmlspecialchars($data->content)), 0, 700) ?> ...</p>
 
             <div class="read-more">
-                <a href="index.php?action=post&id=<?= $data['id'] ?>#chapter-content" title="<?= htmlspecialchars($data['title']) ?>">Lire la suite</a>
+                <a href="index.php?action=post&id=<?= $data->id ?>#chapter-content" title="<?= htmlspecialchars($data->title) ?>">Lire la suite</a>
             </div>
 
         </article>
