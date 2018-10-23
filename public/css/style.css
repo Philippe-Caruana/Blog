@@ -93,9 +93,14 @@ img {
 	color: #002752;
 }
 
+.alert-info .alert-link {
+	color: #062c33;
+}
+
 .alert-link {
 	font-weight: bold;
 }
+
 /* HEADER */
 
 header {
@@ -257,6 +262,7 @@ article, #comments {
 #login-container i {
 	margin: 0;
 	color: grey;
+	font-size: 1.5em;
 }
 
 #login-container label:hover {

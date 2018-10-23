@@ -10,7 +10,7 @@ ob_start();
     
     <h2>Identifiez-vous</h2>
 
-    <p>Connectez-vous avec votre adresse email et votre mot de passe pour accéder à votre compte.</p>
+    <p class="alert alert-dark">Connectez-vous avec votre adresse email et votre mot de passe pour accéder à votre compte.</p>
 
     <form method="post" action="index.php?action=">
 
@@ -30,8 +30,8 @@ ob_start();
 
     </form>
 
-    <p class="alert alert-primary">Première visite ? 
-        <a href="" class="alert-link">Créer un compte</a>
+    <p class="alert alert-info">Première visite ? 
+        <a href="index.php?action=sign-up" class="alert-link">Créer un compte</a>
     </p>
 
 </section>
