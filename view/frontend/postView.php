@@ -1,6 +1,6 @@
 <?php 
 
-$title = htmlspecialchars($post['title']);
+$title = htmlspecialchars($post->title);
 
 ob_start();
 
@@ -14,9 +14,9 @@ ob_start();
 
 <article>
 
-    <h3><?= htmlspecialchars($post['title']) ?><em> le <?= $post['creation_date_fr'] ?></em></h3>
+    <h3><?= htmlspecialchars($post->title) ?><em> le <?= $post->creation_date_fr ?></em></h3>
     
-    <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+    <p><?= nl2br(htmlspecialchars($post->content)) ?></p>
 
 </article>
 
@@ -25,15 +25,15 @@ ob_start();
     <h3>Commentaires</h3>
 
     <?php
-
+        
         while($comment = $comments->fetch())
         {
     ?>  
             <div class="frame">
 
-                <p><?= '<b>' . htmlspecialchars($comment['author']) . '</b>, le ' . htmlspecialchars($comment['publish_date_fr']); ?></p>
+                <p><?= '<b>' . htmlspecialchars($comment->author) . '</b>, le ' . htmlspecialchars($comment->publish_date_fr); ?></p>
 
-                <p><?= htmlspecialchars($comment['comment']) ?></p>
+                <p><?= htmlspecialchars($comment->comment) ?></p>
 
             </div>
     <?php
