@@ -11,7 +11,7 @@ try{
 				post();
 			}
 			else {
-				header("Location: /");
+				header("Location: /index.php#chapters");
 			}
 		}
 	}
