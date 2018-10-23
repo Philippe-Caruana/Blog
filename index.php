@@ -17,6 +17,9 @@ try{
 		else if($_GET['action'] == "login") {
 			displayLogin();
 		}
+		else {
+			listPosts();
+		}
 	}
 	else {
 		listPosts();
