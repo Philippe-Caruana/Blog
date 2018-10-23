@@ -49,7 +49,7 @@
 
 						<li>
 							<i class="fas fa-sign-in-alt"></i>
-							<a href="">Se connecter</a>
+							<a href="index.php?action=login">Se connecter</a>
 						</li>
 					</ul>
 
