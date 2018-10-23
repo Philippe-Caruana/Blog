@@ -177,9 +177,18 @@ article, #comments {
 	margin: 0 auto;
 }
 
+#comments h3 {
+	text-align: center;
+}
+
 .frame {
 	box-sizing: border-box;
+	border: solid black 0.0625em;
+	padding: 1em;
+	margin-bottom: 1em;
+	box-shadow: 0.3125em 0.3125em 0.3125em grey;
 }
+
 /* FOOTER */
 
 footer {
