@@ -2,7 +2,7 @@
 
 namespace Projet8\Blog;
 
-include_once('model/Manager.php');
+require_once('model/Manager.php');
 
 class PostManager extends Manager
 {
