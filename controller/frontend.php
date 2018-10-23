@@ -17,11 +17,18 @@ function listPosts()
 function post()
 {
 	$postManager = new PostManager();
-	$commentManager = new CommentManager();
 
 	$post = $postManager->getPost($_GET['id']);
 
-	$comments = $commentManager->getComments($_GET['id']);
+	if($post) {
 
-	require('view/frontend/postView.php');
+		$commentManager = new CommentManager();
+
+		$comments = $commentManager->getComments($_GET['id']);
+
+		require('view/frontend/postView.php');
+	}
+	else {
+		header("Location: /index.php#chapters");
+	}
 }
