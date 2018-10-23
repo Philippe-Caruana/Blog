@@ -45,6 +45,57 @@ img {
 	width: 100%;
 }
 
+.alert {
+	position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.alert-primary {
+	color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+.alert-success {
+	color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+	color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-info {
+	color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+.alert-dark {
+	color: #1b1e21;
+    background-color: #d6d8d9;
+    border-color: #c6c8ca;
+}
+
+.alert-warning {
+	color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.alert-primary .alert-link {
+	color: #002752;
+}
+
+.alert-link {
+	font-weight: bold;
+}
 /* HEADER */
 
 header {
@@ -151,7 +202,7 @@ article p {
 	text-align: center;
 }
 
-.read-more a, .backlink a {
+.read-more a, .backlink a, input[type=submit] {
 	display: inline-block;
 	line-height: 1.25em;
 	padding: 0.5625em 1.875em;
@@ -161,9 +212,10 @@ article p {
 	color: white;
 }
 
-.read-more a:hover, .backlink a {
+.read-more a:hover, .backlink a:hover, input[type=submit]:hover{
 	background-color: #00aeff;
 	box-shadow: 0 0 rgba(0,0,0,0);
+	cursor: pointer;
 }
 
 /* PAGE VIEW */
@@ -187,6 +239,72 @@ article, #comments {
 	padding: 1em;
 	margin-bottom: 1em;
 	box-shadow: 0.3125em 0.3125em 0.3125em grey;
+}
+
+/* LOGIN PAGE */
+
+#login-container {
+	width: 25%;
+	margin: 2em auto;
+	text-align: center;
+	padding-bottom: 0;
+}
+
+#login-container form {
+	margin: 1.5em 0;
+}
+
+#login-container i {
+	margin: 0;
+	color: grey;
+}
+
+#login-container label:hover {
+	cursor: pointer;
+}
+
+#login-container form > div:first-of-type{
+	margin: 1.5em 0;
+}
+
+#login-container div:first-of-type, #login-container div:nth-of-type(2) {
+	display: flex;
+}
+
+#login-container div:first-of-type label, #login-container div:nth-of-type(2) label{
+	display: flex;
+	box-sizing: border-box;
+	align-items: center;
+	justify-content: center;
+	border: solid grey 0.0625em;
+	flex: 0 0 20%;
+	background-color: #e9ecef;
+}
+
+#login-container div:first-of-type input, #login-container div:nth-of-type(2) input {
+	flex: 0 0 80%;
+}
+
+#login-container div:last-child {
+	margin: 1.5em 0 0 0;
+}
+
+input[type=mail], input[type=password] {
+	box-sizing: border-box;
+	height: 3em;
+	font-size: 1.1em;
+	text-align: center;
+	border: solid grey 0.0625em;
+}
+
+input[type=submit] {
+	padding: 0.7em;
+	font-size: 1em;
+}
+
+input[type=mail]:focus, input[type=password]:focus {
+	outline: none;
+	border: solid black 0.0625em;
 }
 
 /* FOOTER */

@@ -32,3 +32,9 @@ function post()
 		header("Location: /index.php#chapters");
 	}
 }
+
+function displayLogin() {
+
+	require('view/frontend/loginView.php');
+	
+}
