@@ -18,7 +18,7 @@ try{
 			displayLogin();
 		}
 		else {
-			listPosts();
+			header("Location: /");
 		}
 	}
 	else {
