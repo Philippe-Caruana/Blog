@@ -68,7 +68,7 @@ function addMember($username, $password, $email) {
 			header('Location: index.php?action=sign-up&error=email-already-used');
 		}
 
-		if (!$usernameValidity && !$mailValidity) {
+		if (!$usernameValidity && !$emailValidity) {
 			// On sécurise le mot de passe
 			$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 			
