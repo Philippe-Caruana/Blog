@@ -12,6 +12,33 @@ ob_start();
 
     <p class="alert alert-dark">* champs obligatoires</p>
 
+    <?php
+
+        if(isset($_GET['error']) && $_GET['error'] == "different-passwords") {
+    ?>       
+            <p class="alert alert-danger fade-out">La confirmation du mot de passe ne correspond pas au mot de passse que vous avez saisi.</p>
+    <?php
+        }
+    ?>
+
+     <?php
+
+        if(isset($_GET['error']) && $_GET['error'] == "username-already-used") {
+    ?>       
+            <p class="alert alert-danger fade-out">Le nom d'utilisateur que vous avez choisi n'est pas disponible.</p>
+    <?php
+        }
+    ?>
+    
+    <?php
+
+        if(isset($_GET['error']) && $_GET['error'] == "email-already-used") {
+    ?>       
+            <p class="alert alert-danger fade-out">L'adresse e-mail que vous avez renseigné est déjà utilisée.</p>
+    <?php
+        }
+    ?>
+
     <form method="post" action="index.php?action=addMember">
         
         <div>
