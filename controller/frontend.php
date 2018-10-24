@@ -58,13 +58,13 @@ function addMember($username, $password, $email) {
 
 		$usernameValidity = $memberManager->checkUsername($username);
 
-		$mailValidity = $memberManager->checkEmail($email);
+		$emailValidity = $memberManager->checkEmail($email);
 
 		if ($usernameValidity) {
 			header('Location: index.php?action=sign-up&error=username-already-used');	
 		}
 
-		if ($mailValidity) {
+		if ($emailValidity) {
 			header('Location: index.php?action=sign-up&error=email-already-used');
 		}
 
