@@ -4,6 +4,7 @@ namespace Projet8\Blog;
 
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
+require_once('model/MemberManager.php');
 
 function listPosts()
 {
@@ -37,4 +38,12 @@ function displayLogin() {
 
 	require('view/frontend/loginView.php');
 	
+}
+
+function displaySignUp() {
+
+	$signUp = true;
+
+	require('view/frontend/registrationView.php');
+
 }
