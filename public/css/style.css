@@ -185,7 +185,6 @@ nav i {
 
 .chapter {
 	box-sizing: border-box;
-	padding: 0 1em;
 	flex: 0 0 50%;
 	margin: 3em auto;
 }
@@ -201,6 +200,10 @@ article h3 {
 
 article p {
 	text-align: justify;
+}
+
+#articles-container p {
+	padding: 0 1em;
 }
 
 .read-more, .backlink {
@@ -248,36 +251,36 @@ article, #comments {
 
 /* LOGIN PAGE */
 
-#login-container {
+#login-container, #registration-container {
 	width: 25%;
 	margin: 2em auto;
 	text-align: center;
 	padding-bottom: 0;
 }
 
-#login-container form {
+#login-container form, #registration-container form {
 	margin: 1.5em 0;
 }
 
-#login-container i {
+#login-container i, #registration-container i {
 	margin: 0;
 	color: grey;
 	font-size: 1.5em;
 }
 
-#login-container label:hover {
+label:hover {
 	cursor: pointer;
 }
 
-#login-container form > div:first-of-type{
+#login-container div:first-of-type, #registration-container div:nth-of-type(2), #registration-container div:last-of-type {
 	margin: 1.5em 0;
 }
 
-#login-container div:first-of-type, #login-container div:nth-of-type(2) {
+#login-container div:first-of-type, #login-container div:nth-of-type(2), #registration-container div:first-of-type, #registration-container div:nth-of-type(2), #registration-container div:nth-of-type(3), #registration-container div:nth-of-type(4) {
 	display: flex;
 }
 
-#login-container div:first-of-type label, #login-container div:nth-of-type(2) label{
+#login-container div label, #registration-container div label {
 	display: flex;
 	box-sizing: border-box;
 	align-items: center;
@@ -287,7 +290,7 @@ article, #comments {
 	background-color: #e9ecef;
 }
 
-#login-container div:first-of-type input, #login-container div:nth-of-type(2) input {
+#login-container div:first-of-type input, #login-container div:nth-of-type(2) input, #registration-container input[type=text], #registration-container input[type=email], #registration-container input[type=password]{
 	flex: 0 0 80%;
 }
 
@@ -295,7 +298,11 @@ article, #comments {
 	margin: 1.5em 0 0 0;
 }
 
-input[type=mail], input[type=password] {
+#registration-container div:nth-of-type(3) {
+	margin: 0 0 1.5em 0;
+}
+
+input[type=text], input[type=email], input[type=password] {
 	box-sizing: border-box;
 	height: 3em;
 	font-size: 1.1em;
@@ -308,7 +315,7 @@ input[type=submit] {
 	font-size: 1em;
 }
 
-input[type=mail]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
 	outline: none;
 	border: solid black 0.0625em;
 }
