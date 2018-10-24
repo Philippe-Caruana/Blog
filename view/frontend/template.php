@@ -69,7 +69,7 @@
        		<?= $content ?>
 			
 			<footer>
-			
+				
 				<p>
 					<i class="fas fa-info-circle"></i>
 					Site non contractuel, réalisé dans le cadre d'une formation
@@ -102,5 +102,23 @@
 			</footer>
 
        	</main>
+		
+		<?php
+
+			if(isset($signUp)) {
+		?>		
+				<script src='https://www.google.com/recaptcha/api.js?render=6LcYrXYUAAAAAD733C5SRX9neLpus6OOTXCIm3xP'></script>
+		       	<script>
+					grecaptcha.ready(function() {
+						grecaptcha.execute('6LcYrXYUAAAAAD733C5SRX9neLpus6OOTXCIm3xP', {action: 'homepage'})
+						.then(function(token) {
+							console.log(token);
+							document.getElementById("g-recaptcha").value = token;
+						});
+					});
+				</script>
+		<?php
+			}
+       	?>
     </body>
 </html>
