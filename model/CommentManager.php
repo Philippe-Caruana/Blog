@@ -10,7 +10,7 @@ class CommentManager extends Manager
     {
     	$bdd = $this->dbConnect();
 
-    	$comments = $bdd->prepare('SELECT id, post_id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %H:%i:%s") AS publish_date_fr FROM comments WHERE post_id = ? ORDER BY comment_date DESC');
+    	$comments = $bdd->prepare('SELECT id, posts_id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %H:%i:%s") AS publish_date_fr FROM comments WHERE posts_id = ? ORDER BY comment_date DESC');
 
     	$comments->execute(array($postId));
 
