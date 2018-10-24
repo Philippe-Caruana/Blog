@@ -16,7 +16,7 @@ ob_start();
 
         <div>
             <label for="email"><i class="fas fa-at"></i></label>
-            <input type="mail" name="email" id="email" placeholder="Email" required>
+            <input type="email" name="email" id="email" placeholder="Email" required>
         </div>
         
         <div>
