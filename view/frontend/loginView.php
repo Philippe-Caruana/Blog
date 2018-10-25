@@ -11,8 +11,17 @@ ob_start();
     <h2>Identifiez-vous</h2>
 
     <p class="alert alert-dark">Connectez-vous avec votre adresse email et votre mot de passe pour accéder à votre compte.</p>
+    
+    <?php
 
-    <form method="post" action="index.php?action=">
+        if(isset($_GET['account-status']) && $_GET['account-status'] == "authentication-failed") {
+    ?>       
+            <p class="alert alert-danger fade-out">L'authentification a échoué, l'adresse e-mail et/ou le mot de passe est incorrect.</p>
+    <?php
+        }
+    ?>
+
+    <form method="post" action="index.php?action=authentication" id="authentication">
 
         <div>
             <label for="email"><i class="fas fa-at"></i></label>
@@ -31,7 +40,7 @@ ob_start();
     </form>
 
     <p class="alert alert-info">Première visite ? 
-        <a href="index.php?action=sign-up" class="alert-link">Créer un compte</a>
+        <a href="index.php?action=sign-up#registration" class="alert-link">Créer un compte</a>
     </p>
 
 </section>
