@@ -6,6 +6,15 @@ require_once("model/Manager.php");
 
 class MemberManager extends Manager
 {
+    public function checkMemberCredentials($email)
+    {
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('SELECT id, groups_id, username, password FROM members WHERE email = ?');
+        $req->execute(array($email));
+        $member = $req->fetch();
+        return $member;
+    }
+
     public function checkUsername($username) {
 		$bdd = $this->dbConnect();
 		$req = $bdd->prepare('SELECT username FROM members WHERE username = ?');
