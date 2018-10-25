@@ -46,10 +46,34 @@
 							<i class="fas fa-user"></i>
 							<a href="">À propos</a>
 						</li>
+						
+						<?php
+
+							if(!empty($_SESSION)) {
+						?>
+								<li>Bonjour <?= htmlspecialchars($_SESSION['username']); ?></li>
+						<?php		
+							}
+						?>
 
 						<li>
-							<i class="fas fa-sign-in-alt"></i>
-							<a href="index.php?action=login">Se connecter</a>
+							<?php
+
+								if(!empty($_SESSION)) {
+							?>	
+									<i class="fas fa-sign-out-alt"></i>
+									<a href="index.php?action=sign-out">Se déconnecter</a>	
+							<?php	
+								}
+								else 
+								{
+							?>
+									<i class="fas fa-sign-in-alt"></i>
+									<a href="index.php?action=login#authentication">Se connecter</a>
+							<?php
+								}
+							?>
+							
 						</li>
 					</ul>
 
@@ -65,6 +89,40 @@
 			<div>
 				<img src="public/images/talkeetna.jpg" alt="Talkeetna | Alaska">
 			</div>
+			
+			<?php
+
+				if(!empty($_SESSION)) {
+
+			        if(isset($_GET['account-status']) && $_GET['account-status'] == "account-successfully-created")
+			        {
+			    ?>		
+			    		<div style="text-align: center">
+			    			<p class="alert alert-success fade-out inline">Merci. Votre compte a bien été créé et vous êtes à présent connecté.e</p>
+			    		</div>
+			    <?php
+			    		var_dump($_SESSION);
+			        }
+
+			        if(isset($_GET['sign-in']) && $_GET['sign-in'] == "success")
+			        {
+			    ?>		
+			    		<div style="text-align: center">
+			    			<p class="alert alert-success fade-out inline">Vous êtes bien connecté.e. Ravi de vous revoir <b><?= htmlspecialchars($_SESSION['username']); ?></b>.</p>
+			    		</div>
+			    <?php
+			        }
+
+			        if(isset($_GET['sign-out']) && $_GET['sign-out'] == "success")
+			        {
+			    ?>		
+			    		<div style="text-align: center">
+			    			<p class="alert alert-success fade-out inline">Vous êtes bien déconnecté.e. À bientôt.</p>
+			    		</div>
+			    <?php
+			        }
+			    }
+			?>
 
        		<?= $content ?>
 			
