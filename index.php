@@ -2,6 +2,8 @@
 
 namespace Projet8\Blog;
 
+session_start();
+
 require('controller/frontend.php');
 
 try{
@@ -43,6 +45,14 @@ try{
 
 				throw new \Exception("Vous devez renseigner tous les champs.");
 			}
+		}
+		elseif ($_GET['action'] == "authentication") {
+
+			authentication(strip_tags($_POST['email']), strip_tags($_POST['password']));
+		}
+		elseif ($_GET['action'] == "sign-out") {
+
+			signOut();
 		}
 		else {
 			header("Location: /");
