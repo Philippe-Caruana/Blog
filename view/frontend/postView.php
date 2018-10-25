@@ -38,8 +38,37 @@ ob_start();
             </div>
     <?php
         }
-    ?>
     
+        if(!empty($_SESSION)) {
+    ?>         
+            <div id="add-comment">
+
+                <form method="post" action="index.php?action=addComment&id=<?= $post->id ?>">
+
+                    <label for="comment">Ajouter un commentaire <i class="far fa-comment-dots"></i></label>
+
+                    <textarea id="comment" name="comment"></textarea>
+                    
+                    <div>
+
+                        <input type="submit" value="Envoyer">
+
+                    </div>
+
+                </form>
+
+            </div>
+    <?php 
+        }
+        else {
+    ?>
+            <div style="text-align: center">
+                <p class="alert alert-primary fade-out inline">Pour me laisser un commentaire, veuillez vous <a href="index.php?action=login#authentication" class="alert-link">connecter.</a></p>
+            </div>
+    <?php
+        }
+    ?>
+
 </section>
 
 <?php
