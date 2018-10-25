@@ -39,7 +39,7 @@ ob_start();
         }
     ?>
 
-    <form method="post" action="index.php?action=addMember">
+    <form method="post" action="index.php?action=addMember" id="registration">
         
         <div>
             <label for="username"><i class="fas fa-user-circle"></i></label>
