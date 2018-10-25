@@ -54,6 +54,18 @@ try{
 
 			signOut();
 		}
+		elseif ($_GET['action'] == 'addComment') {
+			if (isset($_GET['id']) && $_GET['id'] > 0) {
+        		if (!empty($_SESSION['username']) && !empty($_POST['comment'])) {
+            		addComment($_GET['id'], $_SESSION['username'], $_POST['comment']);
+        		}
+        		else {
+            		throw new \Exception('Tous les champs ne sont pas remplis !');
+        		}
+    		}else {
+        		throw new \Exception('Aucun identifiant de billet envoyé');
+    		}
+    	}
 		else {
 			header("Location: /");
 		}
