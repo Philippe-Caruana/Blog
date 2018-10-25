@@ -101,6 +101,10 @@ img {
 	font-weight: bold;
 }
 
+.inline {
+	display: inline-block;
+}
+
 /* HEADER */
 
 header {
@@ -152,10 +156,13 @@ nav ul li {
 	line-height: 5em;
 }
 
-nav ul li a {
-	padding: 0 0 0.4em 0;
+nav ul li a, nav ul li {
 	text-transform: uppercase;
 	color: #5cadd3;
+}
+
+nav ul li a {
+	padding: 0 0 0.4em 0;
 }
 
 nav ul li a:hover {
