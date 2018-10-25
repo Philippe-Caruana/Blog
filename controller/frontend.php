@@ -61,11 +61,11 @@ function addMember($username, $password, $email) {
 		$emailValidity = $memberManager->checkEmail($email);
 
 		if ($usernameValidity) {
-			header('Location: index.php?action=sign-up&error=username-already-used');	
+			header('Location: index.php?action=sign-up&error=username-already-used#registration');	
 		}
 
 		if ($emailValidity) {
-			header('Location: index.php?action=sign-up&error=email-already-used');
+			header('Location: index.php?action=sign-up&error=email-already-used#registration');
 		}
 
 		if (!$usernameValidity && !$emailValidity) {
@@ -74,11 +74,50 @@ function addMember($username, $password, $email) {
 			
 			$memberManager->createMember($username, $hashed_password, $email);
 			
+			// On connecte automatiquement la personne une fois son compte créé
+			authentication($email, $password);
+
 			// On affiche une notification à l'utilisateur en page d'accueil
 			header('Location: index.php?account-status=account-successfully-created');
 		}	
 	} 
 	else {
-		header('Location: index.php?action=subscribe&error=google-recaptcha');
+		header('Location: index.php?action=sign-up&error=google-recaptcha');
 	}
+}
+
+function authentication($email, $password) {
+
+	$memberManager = new MemberManager();
+	
+	$member = $memberManager->checkMemberCredentials($email);
+
+	$isPasswordCorrect = password_verify($password, $member->password);
+
+	if (!$member) {
+        header('Location: index.php?action=login&account-status=authentication-failed#authentication');
+    }
+    else {
+    	if ($isPasswordCorrect) {
+    		$_SESSION['id'] = $member->id;
+    		$_SESSION['username'] = ucfirst(strtolower($member->username));
+    		$_SESSION['groups_id'] = $member->groups_id;
+    		
+    		header('Location: index.php?sign-in=success');
+    	}
+        else {
+        	header('Location: index.php?action=login&account-status=authentication-failed#authentication');
+        }
+    }
+}
+
+function signOut() {
+
+	$_SESSION = array();
+
+	setcookie(session_name(), '', time() - 42000);
+
+	session_destroy();
+
+	header('Location: index.php?sign-out=success');
 }
