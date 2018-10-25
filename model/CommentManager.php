@@ -16,4 +16,19 @@ class CommentManager extends Manager
 
     	return $comments;
     }
+
+    public function postComment($postId, $author, $comment)
+    {
+    	$bdd = $this->dbConnect();
+
+    	$request = $bdd->prepare('INSERT INTO comments(posts_id, author, comment, comment_date) VALUES(:posts_id, :author, :comment, NOW())');
+        
+        $affectedLines = $request->execute(array(
+        	'posts_id'	=>	$postId, 
+        	'author'	=>	$author, 
+        	'comment'	=>	$comment
+        ));
+        
+        return $affectedLines;
+    }
 }

@@ -102,7 +102,7 @@ function authentication($email, $password) {
     		$_SESSION['id'] = $member->id;
     		$_SESSION['username'] = ucfirst(strtolower($member->username));
     		$_SESSION['groups_id'] = $member->groups_id;
-    		
+
     		header('Location: index.php?sign-in=success');
     	}
         else {
@@ -120,4 +120,18 @@ function signOut() {
 	session_destroy();
 
 	header('Location: index.php?sign-out=success');
+}
+
+function addComment($postId, $author, $comment) {
+	
+	$commentManager = new CommentManager();
+
+	$affectedLines = $commentManager->postComment($postId, $author, $comment);
+
+	if ($affectedLines === false) {
+		throw new \Exception("Impossible d'ajouter le commentaire !");
+	}
+	else {
+		header('Location: index.php?action=post&id=' . $postId . '#comments');
+	}
 }
