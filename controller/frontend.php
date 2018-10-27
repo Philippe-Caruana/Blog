@@ -5,6 +5,7 @@ namespace Projet8\Blog;
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/MemberManager.php');
+require_once('model/ReportManager.php');
 
 function listPosts()
 {
@@ -24,8 +25,13 @@ function post()
 	if($post) {
 
 		$commentManager = new CommentManager();
+		$reportManager = new ReportManager();
 
 		$comments = $commentManager->getComments($_GET['id']);
+
+		if(!empty($_SESSION)) {
+			$reportedCommentsId = $reportManager->getReportedCommentsId($_SESSION['id']);
+		}
 
 		require('view/frontend/postView.php');
 	}
@@ -122,11 +128,11 @@ function signOut() {
 	header('Location: index.php?sign-out=success');
 }
 
-function addComment($postId, $author, $comment) {
+function addComment($postId, $username, $comment) {
 	
 	$commentManager = new CommentManager();
 
-	$affectedLines = $commentManager->postComment($postId, $author, $comment);
+	$affectedLines = $commentManager->postComment($postId, $username, $comment);
 
 	if ($affectedLines === false) {
 		throw new \Exception("Impossible d'ajouter le commentaire !");
@@ -134,4 +140,13 @@ function addComment($postId, $author, $comment) {
 	else {
 		header('Location: index.php?action=post&id=' . $postId . '#comments');
 	}
+}
+
+function reportComment($postId, $commentId, $memberId) {
+	
+	$reportManager = new ReportManager();
+	
+	$reportManager->saveReport($commentId, $memberId);
+
+	header('Location: index.php?action=post&id=' . $postId . '&report=success#comments');
 }
