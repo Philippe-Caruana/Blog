@@ -54,6 +54,17 @@
 								<li>Bonjour <?= htmlspecialchars($_SESSION['username']); ?></li>
 						<?php		
 							}
+							
+							if(!empty($_SESSION) && $_SESSION['groups_id'] === "1") {
+						?>
+								<li>
+									
+									<i class="fas fa-chalkboard-teacher"></i>
+									<a href="#">Administration</a>
+
+								</li>
+						<?php
+							}
 						?>
 
 						<li>
@@ -86,12 +97,23 @@
 
 			</header>
 
-			<div>
-				<img src="public/images/talkeetna.jpg" alt="Talkeetna | Alaska">
-			</div>
-			
 			<?php
 
+				if(isset($post)) {
+					$img = "aurore-boreale.jpg";
+				}
+				else {
+					$img = "talkeetna.jpg";
+				}
+			?>
+					
+				<div id="parallax" style="background-image:url('/public/images/<?= $img ?>')">
+					
+				</div>
+			
+		
+			<?php
+			
 				if(!empty($_SESSION)) {
 
 			        if(isset($_GET['account-status']) && $_GET['account-status'] == "account-successfully-created")
@@ -101,7 +123,6 @@
 			    			<p class="alert alert-success fade-out inline">Merci. Votre compte a bien été créé et vous êtes à présent connecté.e</p>
 			    		</div>
 			    <?php
-			    		var_dump($_SESSION);
 			        }
 
 			        if(isset($_GET['sign-in']) && $_GET['sign-in'] == "success")
@@ -112,16 +133,16 @@
 			    		</div>
 			    <?php
 			        }
-
-			        if(isset($_GET['sign-out']) && $_GET['sign-out'] == "success")
-			        {
-			    ?>		
-			    		<div style="text-align: center">
-			    			<p class="alert alert-success fade-out inline">Vous êtes bien déconnecté.e. À bientôt.</p>
-			    		</div>
-			    <?php
-			        }
 			    }
+
+			    if(isset($_GET['sign-out']) && $_GET['sign-out'] == "success")
+		        {
+		    ?>		
+		    		<div style="text-align: center">
+		    			<p class="alert alert-success fade-out inline">Vous êtes bien déconnecté.e. À bientôt.</p>
+		    		</div>
+		    <?php
+		        }
 			?>
 
        		<?= $content ?>

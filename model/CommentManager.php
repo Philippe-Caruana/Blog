@@ -10,23 +10,23 @@ class CommentManager extends Manager
     {
     	$bdd = $this->dbConnect();
 
-    	$comments = $bdd->prepare('SELECT id, posts_id, author, comment, DATE_FORMAT(comment_date, "%d/%m/%Y à %H:%i:%s") AS publish_date_fr FROM comments WHERE posts_id = ? ORDER BY comment_date DESC');
+    	$comments = $bdd->prepare('SELECT comments.id, posts_id, username, comment, groups_id, DATE_FORMAT(comment_date, "%d/%m/%Y à %H:%i:%s") AS publish_date_fr FROM comments INNER JOIN members ON comments.members_id = members.id WHERE posts_id = ? ORDER BY comment_date DESC');
 
     	$comments->execute(array($postId));
 
     	return $comments;
     }
 
-    public function postComment($postId, $author, $comment)
+    public function postComment($postId, $memberId, $comment)
     {
     	$bdd = $this->dbConnect();
 
-    	$request = $bdd->prepare('INSERT INTO comments(posts_id, author, comment, comment_date) VALUES(:posts_id, :author, :comment, NOW())');
+    	$request = $bdd->prepare('INSERT INTO comments(posts_id, members_id, comment, comment_date) VALUES(:posts_id, :members_id, :comment, NOW())');
         
         $affectedLines = $request->execute(array(
-        	'posts_id'	=>	$postId, 
-        	'author'	=>	$author, 
-        	'comment'	=>	$comment
+        	'posts_id'     =>	$postId, 
+        	'members_id'   =>	$memberId, 
+        	'comment'      =>	$comment
         ));
         
         return $affectedLines;
