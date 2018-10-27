@@ -23,16 +23,49 @@ ob_start();
 <section id="comments">
 
     <h3>Commentaires</h3>
-
+    
     <?php
         
+        if(!empty($_SESSION)) {
+
+            if(isset($_GET['report']) && $_GET['report'] == "success")
+            {
+        ?>      
+                <div style="text-align: center">
+                    <p class="alert alert-success fade-out inline">Merci. Le commentaire a bien été signalé.</p>
+                </div>
+        <?php
+            }
+        }
+
         while($comment = $comments->fetch())
         {
-    ?>  
+    ?>      
             <div class="frame">
+                
+                <p>
+                    <?= '<b>' . htmlspecialchars($comment->username) . '</b>, le ' . htmlspecialchars($comment->publish_date_fr);
 
-                <p><?= '<b>' . htmlspecialchars($comment->author) . '</b>, le ' . htmlspecialchars($comment->publish_date_fr); ?></p>
+                if($comment->groups_id === "1") {
+                    echo '<span class="author">Auteur</span>';
+                }
 
+                if (!empty($_SESSION)) {
+                    if (!in_array($comment->id, $reportedCommentsId) && $comment->username !== $_SESSION['username'] && $comment->groups_id !== "1") {
+    ?>              
+                        <span class="float-r">
+                        
+                            <i class="fas fa-exclamation-triangle"></i>
+
+                            <a href="index.php?action=report&id=<?= $comment->posts_id ?>&comment-id=<?= $comment->id ?>" title="Signaler le commentaire de <?= htmlspecialchars($comment->username); ?>">Signaler</a>
+
+                        </span>
+    <?php
+                    }
+                }
+    ?>
+                </p>
+        
                 <p><?= htmlspecialchars($comment->comment) ?></p>
 
             </div>
