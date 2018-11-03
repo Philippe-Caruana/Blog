@@ -16,14 +16,15 @@ function listPosts()
 	require('view/frontend/listPostsView.php');
 }
 
-function post()
+function post($postId)
 {
 	$postManager = new PostManager();
 
-	$post = $postManager->getPost($_GET['id']);
+	$post = $postManager->getPost($postId);
 
 	if($post) {
 
+		$editView = false;
 		$commentManager = new CommentManager();
 		$reportManager = new ReportManager();
 
@@ -31,6 +32,10 @@ function post()
 
 		if(!empty($_SESSION)) {
 			$reportedCommentsId = $reportManager->getReportedCommentsId($_SESSION['id']);
+
+			if($_SESSION['groups_id'] == 1 && $_GET['action'] == "edit-post") {
+				$editView = true;
+			}
 		}
 
 		require('view/frontend/postView.php');
@@ -41,6 +46,8 @@ function post()
 }
 
 function displayLogin() {
+
+	$signIn = true;
 
 	require('view/frontend/loginView.php');
 	
@@ -101,7 +108,7 @@ function authentication($email, $password) {
 	$isPasswordCorrect = password_verify($password, $member->password);
 
 	if (!$member) {
-        header('Location: index.php?action=login&account-status=authentication-failed#authentication');
+        header('Location: index.php?action=login&account-status=authentication-failed#login');
     }
     else {
     	if ($isPasswordCorrect) {
@@ -112,7 +119,7 @@ function authentication($email, $password) {
     		header('Location: index.php?sign-in=success');
     	}
         else {
-        	header('Location: index.php?action=login&account-status=authentication-failed#authentication');
+        	header('Location: index.php?action=login&account-status=authentication-failed#login');
         }
     }
 }
@@ -149,4 +156,23 @@ function reportComment($postId, $commentId, $memberId) {
 	$reportManager->saveReport($commentId, $memberId);
 
 	header('Location: index.php?action=post&id=' . $postId . '&report=success#comments');
+}
+
+function loadMoreChapters($numPage) {
+
+	$postManager = new PostManager();
+
+	$chaptersPerPage = 6;
+
+	$nb_posts = $postManager->countPosts();
+
+	$nb_pages = ceil(intval($nb_posts) / $chaptersPerPage);
+
+	$startChaptersAt = (intval($_GET['page']) - 1) * $chaptersPerPage;
+
+	$chapters = $postManager->getMoreChapters($chaptersPerPage, $startChaptersAt);
+
+	$nextPage = intval($_GET['page']) + 1;
+
+	require('view/frontend/ajaxView.php');
 }

@@ -4,6 +4,7 @@
 
 html, body, main {
 	width: 100%;
+	height: 100%;
 	margin: 0;
 	padding: 0;
 }
@@ -15,10 +16,15 @@ main {
 section h2 {
 	margin: 0;
 	text-align: center;
+	scroll-behavior: auto;
 }
 
 a {
 	text-decoration: none;
+}
+
+a:visited {
+	color: inherit;
 }
 
 ul {
@@ -114,10 +120,13 @@ img {
 	border-radius: 0.1875em;
 	padding: 0.1875em;
 	margin-left: 5px;
+	display: none;
 }
 
 #parallax {
-	height: 900px;
+	box-sizing: border-box;
+	position: relative;
+	height: 100vh;
 	padding: 80px 0 0 0;
 	background-attachment: fixed;
     background-position: center;
@@ -125,17 +134,88 @@ img {
     background-size: cover;
 }
 
+#parallax a {
+	padding-top: 60px;
+	position: absolute;
+	bottom: 1em;
+	left: 48.8%;
+	color: black;
+	font : normal 400 20px/1 'Josefin Sans', sans-serif;
+}
+
+#parallax a span {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 30px;
+	height: 50px;
+	margin-left: -15px;
+	border: 2px solid black;
+	border-radius: 50px;
+	box-sizing: border-box;
+}
+
+#parallax a span::before {
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	content: '';
+	width: 6px;
+	height: 6px;
+	margin-left: -3px;
+	background-color: black;
+	border-radius: 100%;
+	-webkit-animation: sdb10 2s infinite;
+	animation: sdb10 2s infinite;
+	box-sizing: border-box;
+}
+
+@keyframes sdb10 {
+	0% {
+		transform: translate(0, 0);
+		opacity: 0;
+	}
+	40% {
+		opacity: 1;
+	}
+	80% {
+		transform: translate(0, 20px);
+		opacity: 0;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.desktop {
+	position: absolute;
+	left: 1em;
+	bottom: 0em;
+}
+
+.txt-center {
+	text-align: center;
+}
+
+.mt-none {
+	margin-top: 0;
+}
+
+.m-rl {
+	margin: 0 0.8em;
+}
+
 /* HEADER */
 
 header {
 	position: fixed;
 	display: flex;
+	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	height: 5em;
 	top: 0px;
-	background-color: white;
+	background-color: rgba(255, 255, 255, 0.8);
 	z-index: 2;
 }
 
@@ -173,12 +253,12 @@ nav ul {
 
 nav ul li {
 	margin: 0 1.5em;
-	line-height: 5em;
+	line-height: 3em;
 }
 
 nav ul li a, nav ul li {
 	text-transform: uppercase;
-	color: #5cadd3;
+	color: #379ac8;
 }
 
 nav ul li a {
@@ -200,7 +280,7 @@ nav i {
 /* ARTICLES */
 
 #chapters {
-	padding: 5em 0 2.5em 0;
+	padding-top: 6em;
 }
 
 #articles-container {
@@ -212,11 +292,14 @@ nav i {
 
 .chapter {
 	box-sizing: border-box;
-	flex: 0 0 50%;
-	margin: 3em auto;
+	margin: 8em auto 3em auto;
 }
 
-.chapter:nth-child(3) {
+.chapter {
+	flex: 0 0 50%;
+}
+
+.chapter:nth-of-type(1), .chapter:nth-of-type(4), .max-w {
 	flex: 0 0 100%;
 }
 
@@ -225,11 +308,12 @@ article h3 {
 	margin: 0;
 }
 
-article p {
-	text-align: justify;
+article {
+	font-family: open sans;
 }
 
-#articles-container p {
+article p {
+	text-align: justify;
 	padding: 0 1em;
 }
 
@@ -237,7 +321,7 @@ article p {
 	text-align: center;
 }
 
-.read-more a, .backlink a, input[type=submit] {
+.read-more a, .backlink a, input[type=submit], #articles-container .txt-center a, .current-page, .next-page {
 	display: inline-block;
 	line-height: 1.25em;
 	padding: 0.5625em 1.875em;
@@ -247,7 +331,7 @@ article p {
 	color: white;
 }
 
-.read-more a:hover, .backlink a:hover, input[type=submit]:hover{
+.read-more a:hover, .backlink a:hover, input[type=submit]:hover, #articles-container .txt-center a:hover {
 	background-color: #00aeff;
 	box-shadow: 0 0 rgba(0,0,0,0);
 	cursor: pointer;
@@ -256,7 +340,7 @@ article p {
 /* PAGE VIEW */
 
 .backlink {
-	padding: 5em 0;
+	padding: 9em 0 6em 0;
 }
 
 article, #comments {
@@ -302,6 +386,7 @@ article, #comments {
 }
 
 #add-comment textarea {
+	box-sizing: border-box;
 	width: 70%;
 	height: 350px;
 	min-height: 350px;
@@ -313,18 +398,16 @@ article, #comments {
 
 /* LOGIN PAGE */
 
-#login-container, #registration-container {
-	width: 25%;
-	margin: 2em auto;
+#login, #registration, #authentication {
 	text-align: center;
 	padding-bottom: 0;
 }
 
-#login-container form, #registration-container form {
+#login form, #registration form {
 	margin: 1.5em 0;
 }
 
-#login-container i, #registration-container i {
+#login i, #registration i, #authentication i{
 	margin: 0;
 	color: grey;
 	font-size: 1.5em;
@@ -334,15 +417,15 @@ label:hover {
 	cursor: pointer;
 }
 
-#login-container div:first-of-type, #registration-container div:nth-of-type(2), #registration-container div:last-of-type {
+#login div:first-of-type, #registration div:nth-of-type(2), #registration div:last-of-type {
 	margin: 1.5em 0;
 }
 
-#login-container div:first-of-type, #login-container div:nth-of-type(2), #registration-container div:first-of-type, #registration-container div:nth-of-type(2), #registration-container div:nth-of-type(3), #registration-container div:nth-of-type(4) {
+#login div:first-of-type, #login div:nth-of-type(2), #registration div:first-of-type, #registration div:nth-of-type(2), #registration div:nth-of-type(3), #registration div:nth-of-type(4), #authentication div:first-child {
 	display: flex;
 }
 
-#login-container div label, #registration-container div label {
+#login div label, #registration div label, #authentication div label {
 	display: flex;
 	box-sizing: border-box;
 	align-items: center;
@@ -352,15 +435,15 @@ label:hover {
 	background-color: #e9ecef;
 }
 
-#login-container div:first-of-type input, #login-container div:nth-of-type(2) input, #registration-container input[type=text], #registration-container input[type=email], #registration-container input[type=password]{
+#login div:first-of-type input, #login div:nth-of-type(2) input, #registration input[type=text], #registration input[type=email], #registration input[type=password], #authentication input[type=password] {
 	flex: 0 0 80%;
 }
 
-#login-container div:last-child {
+#login div:last-child {
 	margin: 1.5em 0 0 0;
 }
 
-#registration-container div:nth-of-type(3) {
+#registration div:nth-of-type(3) {
 	margin: 0 0 1.5em 0;
 }
 
@@ -380,6 +463,10 @@ input[type=submit] {
 input[type=text]:focus, input[type=email]:focus, input[type=password]:focus, textarea:focus {
 	outline: none;
 	border: solid black 0.0625em;
+}
+
+#authentication div:last-child {
+	margin: 1em 0;
 }
 
 /* FOOTER */
@@ -406,4 +493,536 @@ footer ul {
 
 footer ul li {
 	line-height: 2em;
+}
+
+/* ADMIN VIEW */
+
+#comments-panel, #edit-articles-panel, #create-articles-panel
+{
+	width: 90%;
+}
+
+#comments-panel {
+	padding-top: 5em;
+}
+
+#comments-panel, #edit-articles-panel, #create-articles-panel {
+	margin: 0 auto;
+	padding-top: 9em;
+}
+
+section #info
+{
+	margin: 20px auto;
+}
+
+#comments-panel h3, #edit-articles-panel h3, #create-articles-panel h3
+{
+	background-color: #3c6382;
+	color: white;
+	margin: 0 auto;
+	text-align: center;
+	padding: 15px 0px;
+	text-transform: uppercase;
+	font-family: 'Roboto', serif, 'Times New Roman';
+	font-size: 1.4em;
+}
+
+#admin-comments-panel
+{
+	width: auto;
+	margin: 0;
+}
+
+.commentBlock ul
+{
+	list-style-type: none;
+}
+
+#info
+{
+	width: 800px;
+	margin: 10px auto;
+}
+
+.nb_report
+{
+	color: green;
+	border: solid green 1px;
+	padding: 3px;
+	border-radius: 3px;
+}
+
+#comments-panel a, #edit-articles-panel a, #create-articles-panel a
+{
+	text-decoration: none;
+	color: black;
+	font-size: 1.1em;
+}
+
+#comments-panel span a:nth-child(2), #edit-articles-panel span a:nth-child(2), #create-articles-panel span a:nth-child(2) {
+	margin: 0 1em;
+}
+
+
+#comments-panel a:visited, #edit-articles-panel a:visited, #create-articles-panel a:visited
+{
+	color: initial;
+}
+/*
+#edit-article-btn
+{
+	position: sticky;
+	top: 0%;
+	right: 5%;
+	background-color: #0e86ca;
+	color: white;
+	border: 1px solid #10a1de;
+	transition: background-color .2s,box-shadow .2s,background-color .2s,border-color .2s,color .2s;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.15) inset;
+	padding: 9px 30px;
+	margin-bottom: 15px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+#edit-article-btn:hover
+{
+	background-color: #00aeff;
+	border-color: #00aeff;
+	box-shadow: 0 0 rgba(0,0,0,0);
+}
+*/
+
+.pagination {
+	text-align: center;
+	margin-top: 2em;
+}
+
+.current-page, .next-page {
+	padding: 0.25em 0.5em;
+	margin-right: 1em;
+	font-size: 1.1em;
+}
+
+.next-page {
+	background-color: white;
+}
+
+#title-article
+{
+	width: 80%;
+	text-align: center;
+	height: 50px;
+	font-size: 1.3em;
+}
+
+#content-article
+{
+	height: auto;
+	width: 80%;
+	height: 1200px;
+	resize: vertical;
+}
+
+.btn
+{
+	display: inline-block;
+	width: 80px;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-primary
+{
+	color: #fff !important;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover
+{
+	color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+    cursor: pointer;
+}
+
+.btn-danger
+{
+	color: #fff !important;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    margin-left: 50px;
+}
+
+.btn-danger:hover
+{
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+#edit-articles-panel .frame div {
+	display: flex;
+	flex-direction: column;
+}
+
+#edit-articles-panel .frame div p {
+	flex: 0 0 50%;
+}
+
+#edit-articles-panel .frame div p:last-child, #comments-panel .frame div div {
+	display: flex;
+	justify-content: flex-end;
+	align-items: baseline;
+}
+
+#create-articles-panel form, input, textarea, #edit-article
+{
+	font-size: 1.3em;
+}
+
+#create-articles-panel label, #edit-article label
+{
+	display: block;
+	text-align: center;
+	margin: 10px 0px;
+	line-height: 50px
+}
+
+#create-articles-panel input[type=text], textarea, #edit-article input[type=text]
+{
+	outline: none;
+	width: 100%;
+}
+
+#create-articles-panel input, #edit-article input
+{
+	line-height: 50px;
+	text-align: center;
+}
+
+#create-articles-panel textarea, #edit-article textarea
+{
+	line-height: 50px;
+	resize: vertical;
+	height: 500px;
+	min-height: 500px;
+}
+
+#create-articles-panel input[type=submit], #edit-article input[type=submit]
+{
+	width: auto;
+	line-height: normal;
+	margin: 20px 10px;
+}
+
+/* ----------------- MODAL ----------------- */
+
+/* The Modal (background) */
+.modal 
+{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 23%; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content 
+{
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* The Close Button */
+.close 
+{
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus 
+{
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#myModal h3
+{
+	font-size: 1em;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 413px) {
+	#comments-panel .frame div div {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	#comments-panel .frame a:first-of-type {
+		margin: 1em 0;
+	}
+}
+
+@media screen and (max-width: 414px) {
+	#login, #registration, #authentication {
+		width: 100%;
+		border: none;
+		box-shadow: none;
+		margin: 0 auto 2em auto;
+		padding-top: 5em;
+	}
+}
+
+@media screen and (min-width: 375px) {
+	header h1 {
+		text-align: center;
+	}
+}
+
+@media screen and (min-width: 414px) {
+	#login, #registration, #authentication {
+		width: 414px;
+		margin: 2em auto;
+	}
+
+	.author {
+		display: inline;
+	}
+}
+
+@media screen and (max-width: 499px) {
+	#menu-left {
+		top: 0em;
+		right: 0.7em;
+	}
+}
+@media screen and (min-width: 500px) {
+	#menu-left {
+		top: 1.3em;
+		right: 2em;
+	}
+
+	#menu-left .open-menu {
+		font-size: 2em;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	header h1 {
+		flex: 0 0 85%;
+	}
+	/*
+	header h2 {
+		display: none;
+	}*/
+
+	.desktop {
+		left: 0em;
+		bottom: -1em;
+	}
+
+	#edit-articles-panel .frame div {
+		align-items: center;
+	}
+
+	#edit-articles-panel .frame div p {
+		margin: 0;
+	}
+
+	#edit-articles-panel .frame div b {
+		display: block;
+	}
+
+	#edit-articles-panel .frame div p:last-child {
+		text-align: center;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	#edit-articles-panel .frame div a, #edit-articles-panel .frame div span {
+		line-height: 3em;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	header {
+		justify-content: center;
+	}
+	
+	header h2 {
+		font-size: 1.7em;
+	}
+
+	nav {
+		position: absolute;
+		left: -100%;
+		top: 5.25em;
+		height: auto;
+		box-sizing: border-box;
+		padding: 2em 1.7em;
+		background-color: rgba(255, 255, 255, 0.8);
+		width: auto;
+		transition: left 1.2s cubic-bezier(0.77,0.2,0.05,1.0);
+	}
+	
+	nav ul {
+		flex-direction: column;
+		margin: 0 0 0 0;
+		padding: 0;
+	}
+	
+	nav ul li {
+		width: 100%;
+		margin: 0;
+		line-height: 3.125em;
+	}
+
+	nav li:first-of-type a {
+		text-decoration: none;
+		color: black;
+	}
+
+	nav li:first-of-type a:hover {
+		box-shadow: 0 -0.1875em 0 white;
+	}
+	
+	.open-menu, .close-menu {
+		color: black;
+	}
+
+	.close-menu {
+		font-size: 2.5em;
+	}
+
+	#menu-left {
+		display: inline-block;
+		position: absolute;
+	}
+	
+	#menu-left .open-menu{
+		font-size: 1.75em;
+	}
+	
+	/* On fait réapparaitre notre menu */
+	
+	#nav:target {
+	    left: 0px;
+	}
+
+	ul>li:first-of-type {
+		display: block;
+	}
+
+	/* On affiche par défaut notre icone burger et lors du target du menu on affiche l'icone de fermeture */
+	.open-menu,
+	#nav:target ~ #menu-left .close-menu {
+		display: block;
+	}
+
+	/* On cache par défaut notre icone de fermeture et lors du target du menu, on cache notre menu burger */
+	#menu-left .close-menu,
+	#nav:target ~ #menu-left .open-menu {
+		display: none;
+	}
+
+	#nav:target ~ #menu-left, section > h2 {
+		margin-top: 0;
+	}
+
+	#parallax {
+		background-position: 35%;
+	}
+
+	#articles-container {
+		display: block;
+		width: 100%;
+	}
+
+	article {
+		width: auto;
+	}
+
+	#comments {
+		width: 95%;
+	}
+
+	#add-comment textarea {
+		width: 90%;
+	}
+	
+	.modal {
+		padding-top: 45%;
+	}
+
+	.modal-content {
+		width: 100%;
+	}
+}
+
+@media screen and (width: 768px) {
+	header {
+		justify-content: flex-start;
+	}
+	
+	header h1 {
+		padding-left: 1em;
+	}
+
+	header h2 {
+		flex: 0 1 60%;
+	}
+
+	#edit-articles-panel .frame div p:last-child, #comments-panel .frame div p:last-child {
+		justify-content: center;
+	}
+}
+
+@media screen and (min-width: 769px) and (max-width: 1016px) {
+	nav ul li {
+		font-size: 0.71em;
+	}
+}
+
+@media screen and (max-width: 1023px) {
+	footer {
+		display: block;
+		text-align: center;
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	header h1 {
+		margin: 0 0 0 1em;
+	}
 }

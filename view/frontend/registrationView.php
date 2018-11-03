@@ -6,7 +6,7 @@ ob_start();
 
 ?>
 
-<section class="frame" id="registration-container">
+<section class="frame" id="registration">
     
     <h2>Identifiants</h2>
 
@@ -39,7 +39,7 @@ ob_start();
         }
     ?>
 
-    <form method="post" action="index.php?action=addMember" id="registration">
+    <form method="post" action="index.php?action=addMember">
         
         <div>
             <label for="username"><i class="fas fa-user-circle"></i></label>

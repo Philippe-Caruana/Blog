@@ -6,7 +6,7 @@ ob_start();
 
 ?>
 
-<section class="frame" id="login-container">
+<section class="frame" id="login">
     
     <h2>Identifiez-vous</h2>
 
@@ -21,7 +21,7 @@ ob_start();
         }
     ?>
 
-    <form method="post" action="index.php?action=authentication" id="authentication">
+    <form method="post" action="index.php?action=authentication">
 
         <div>
             <label for="email"><i class="fas fa-at"></i></label>

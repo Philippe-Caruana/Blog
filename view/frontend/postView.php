@@ -12,11 +12,64 @@ ob_start();
 
 </p>
 
-<article>
+<?php
 
-    <h3><?= htmlspecialchars($post->title) ?><em> le <?= $post->creation_date_fr ?></em></h3>
+if(!empty($_SESSION) && $_SESSION['groups_id'] == "1" && $editView == true) {
+
+    if (isset($_GET['update-post']) && $_GET['update-post'] == 'success') 
+    {
+        echo '<div class="txt-center"><p class="alert alert-success inline fade-out mt-none">L\'article a bien été modifié.</p></div>';
+    }
+
+    if (isset($_GET['update-post']) && $_GET['update-post'] == 'failed') 
+    {
+        echo '<div class="txt-center"><p class="alert alert-danger inline fade-out mt-none">L\'article n\'a pas pu être modifié.</p></div>';
+    }
+}
+
+?>
+
+<article>
     
-    <p><?= nl2br(htmlspecialchars($post->content)) ?></p>
+    <?php
+
+        if(!empty($_SESSION) && $_SESSION['groups_id'] == "1" && $editView == true) {
+    ?>
+            <form method="post" action="index.php?action=update-post&id=<?= $post->id ?>" id="edit-article">
+
+                <div class="frame">
+                    
+                    <label for="title">Titre de l'article</label>
+
+                    <input type="text" id="title" name="title" value="<?= htmlspecialchars($post->title) ?>">
+
+                </div>
+
+                <div class="frame">
+                    
+                    <label for="content">Contenu de l'article</label>
+
+                    <textarea id="content-article" name="content"><?= $post->content ?></textarea>
+                    
+                    <div style="text-align:center">
+                    
+                        <input class="btn btn-primary" type="submit" value="Mettre à jour l'article">
+                        
+                    </div>
+
+                </div>
+
+            </form>
+    <?php
+        }
+        else {
+    ?>
+            <h3><?= htmlspecialchars($post->title) ?><em> le <?= $post->creation_date_fr ?></em></h3>
+    
+            <p><?= nl2br($post->content) ?></p>
+    <?php
+        }
+    ?>
 
 </article>
 
@@ -96,7 +149,7 @@ ob_start();
         else {
     ?>
             <div style="text-align: center">
-                <p class="alert alert-primary fade-out inline">Pour me laisser un commentaire, veuillez vous <a href="index.php?action=login#authentication" class="alert-link">connecter.</a></p>
+                <p class="alert alert-primary inline">Pour me laisser un commentaire, veuillez vous <a href="index.php?action=login#login" class="alert-link">connecter.</a></p>
             </div>
     <?php
         }

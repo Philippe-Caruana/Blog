@@ -19,7 +19,7 @@ ob_start();
 
             <h3><?= htmlspecialchars($data->title) ?> le <?= $data->creation_date_fr ?></h3>
             
-            <p><?= substr(nl2br(htmlspecialchars($data->content)), 0, 700) ?> ...</p>
+            <p><?= nl2br(substr($data->content, 0, 700)) ?> ...</p>
 
             <div class="read-more">
                 <a href="index.php?action=post&id=<?= $data->id ?>#chapter-content" title="<?= htmlspecialchars($data->title) ?>">Lire la suite</a>
@@ -33,8 +33,9 @@ ob_start();
 $posts->closeCursor();
 
 ?>
-
-        </div>
+        <p class="txt-center max-w">
+            <a href="index.php?action=load-more-content&page=2" id="page-2" onclick="loadChapters(this, event)">Afficher plus de chapitres</a>
+        </p>
 
     </section>
 

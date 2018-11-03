@@ -18,7 +18,7 @@
 		<meta property="og:description" content="Découvrez le nouveau roman de Jean Forteroche, Billet simple pour l'Alaska. Un nouveau chapitre tous les 15 du mois !">
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-        <link href="public/css/style.css?<?= time(); ?>" rel="stylesheet" /> 
+        <link href="public/css/style.css?<?= time(); ?>" rel="stylesheet" />
     </head>
         
     <body>
@@ -37,6 +37,14 @@
 						<li>
 							<a href="#" class="close-menu">&#10799;</a>
 						</li>
+						<?php
+
+							if(!empty($_SESSION)) {
+						?>
+								<li>Bonjour <?= htmlspecialchars($_SESSION['username']); ?></li>
+						<?php		
+							}
+						?>
 						<li>
 							<i class="fas fa-home"></i>
 							<a href="/">Accueil</a>
@@ -48,20 +56,25 @@
 						</li>
 						
 						<?php
-
-							if(!empty($_SESSION)) {
-						?>
-								<li>Bonjour <?= htmlspecialchars($_SESSION['username']); ?></li>
-						<?php		
-							}
 							
 							if(!empty($_SESSION) && $_SESSION['groups_id'] === "1") {
 						?>
 								<li>
 									
 									<i class="fas fa-chalkboard-teacher"></i>
-									<a href="#">Administration</a>
 
+						<?php		
+									if(isset($_COOKIE['adminAccess']) && $_COOKIE['adminAccess'] === '1') {
+						
+									echo '<a href="index.php?action=admin">Administration</a>';
+									
+								}
+								else {
+						
+									echo '<a href="index.php?action=administration#authentication">Administration</a>';
+						
+								}
+						?>	
 								</li>
 						<?php
 							}
@@ -80,7 +93,7 @@
 								{
 							?>
 									<i class="fas fa-sign-in-alt"></i>
-									<a href="index.php?action=login#authentication">Se connecter</a>
+									<a href="index.php?action=login#login">Se connecter</a>
 							<?php
 								}
 							?>
@@ -101,15 +114,29 @@
 
 				if(isset($post)) {
 					$img = "aurore-boreale.jpg";
+					$hash = "#chapter-content";
+				}
+				elseif(isset($signIn)) {
+					$img = "aurore-boreale.jpg";
+					$hash = "#login";
+				}
+				elseif(isset($signUp)) {
+					$img = "aurore-boreale.jpg";
+					$hash = "#registration";
 				}
 				else {
 					$img = "talkeetna.jpg";
+					$hash = "#chapters";
+				}
+			
+				if(!isset($_GET['action']) || (isset($_GET['action']) && $_GET['action'] !== "admin")) {
+			?>	
+					<div id="parallax" style="background-image:url('/public/images/<?= $img ?>')">
+						<a href="<?= $hash ?>" onclick="scrollWin(event)"><span></span>Scroll</a>
+					</div>
+			<?php
 				}
 			?>
-					
-				<div id="parallax" style="background-image:url('/public/images/<?= $img ?>')">
-					
-				</div>
 			
 		
 			<?php
@@ -119,7 +146,7 @@
 			        if(isset($_GET['account-status']) && $_GET['account-status'] == "account-successfully-created")
 			        {
 			    ?>		
-			    		<div style="text-align: center">
+			    		<div class="desktop txt-center">
 			    			<p class="alert alert-success fade-out inline">Merci. Votre compte a bien été créé et vous êtes à présent connecté.e</p>
 			    		</div>
 			    <?php
@@ -128,7 +155,7 @@
 			        if(isset($_GET['sign-in']) && $_GET['sign-in'] == "success")
 			        {
 			    ?>		
-			    		<div style="text-align: center">
+			    		<div class="desktop txt-center">
 			    			<p class="alert alert-success fade-out inline">Vous êtes bien connecté.e. Ravi de vous revoir <b><?= htmlspecialchars($_SESSION['username']); ?></b>.</p>
 			    		</div>
 			    <?php
@@ -138,7 +165,7 @@
 			    if(isset($_GET['sign-out']) && $_GET['sign-out'] == "success")
 		        {
 		    ?>		
-		    		<div style="text-align: center">
+		    		<div class="desktop txt-center">
 		    			<p class="alert alert-success fade-out inline">Vous êtes bien déconnecté.e. À bientôt.</p>
 		    		</div>
 		    <?php
@@ -191,13 +218,37 @@
 					grecaptcha.ready(function() {
 						grecaptcha.execute('6LcYrXYUAAAAAD733C5SRX9neLpus6OOTXCIm3xP', {action: 'homepage'})
 						.then(function(token) {
-							console.log(token);
 							document.getElementById("g-recaptcha").value = token;
 						});
 					});
 				</script>
 		<?php
 			}
+       	
+			if(!isset($_GET['action'])) {
+		?>	
+				<script src="public/js/frontend/ajax.js"></script>
+		<?php
+			}
        	?>
+
+       	<script src="public/js/frontend/app.js"></script>
+       	<?php
+
+	       	if(!empty($_SESSION) && $_SESSION['groups_id'] == "1") {
+	    		if(isset($adminView) || isset($editView)){
+	    ?>
+	    			<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+	    			<script src="public/js/backend/app.js"></script>
+	    <?php
+	    		}
+
+	    		if(isset($_GET['action']) && $_GET['action'] == "admin") {
+	    ?>
+	    			<script src="public/js/backend/modal.js"></script>
+	    <?php
+	    		}
+	       	}
+	    ?>
     </body>
 </html>
