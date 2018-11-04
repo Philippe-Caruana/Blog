@@ -14,8 +14,18 @@
 		<meta property="og:title" content="Jean Forteroche : Billet simple pour l'Alaska" />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="projet8.philippecaruana.fr" />
-		<meta property="og:image" content="" />
+		<meta property="og:image" content="/public/images/talkeetna.jpg" />
 		<meta property="og:description" content="Découvrez le nouveau roman de Jean Forteroche, Billet simple pour l'Alaska. Un nouveau chapitre tous les 15 du mois !">
+		
+		<link rel="icon" href="book-icon.png" type="image/png" sizes="16x16">
+		<link rel="apple-touch-icon" href="book-icon.png" type="image/png" sizes="57x57">
+		<link rel="apple-touch-icon" href="book-icon.png" type="image/png" sizes="60x60">
+		<link rel="apple-touch-icon" href="book-icon.png" type="image/png" sizes="72x72">
+		<link rel="apple-touch-icon" href="book-icon.png" type="image/png" sizes="76x76">
+		<link rel="apple-touch-icon" href="book-icon.png" type="image/png" sizes="124x124">
+		<link rel="apple-touch-icon" href="book-icon.png" type="image/png" sizes="144x144">
+		<link rel="apple-touch-icon" href="book-icon.png" type="image/png" sizes="152x152">
+		<link rel="apple-touch-icon" href="book-icon.png" type="image/png" sizes="180x180">
 
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
         <link href="public/css/style.css?<?= time(); ?>" rel="stylesheet" />
@@ -24,7 +34,7 @@
     <body>
 
     	<main>
-
+    		
 			<header>
 				
 				<h1>Jean Forteroche</h1>
@@ -133,6 +143,7 @@
 			?>	
 					<div id="parallax" style="background-image:url('/public/images/<?= $img ?>')">
 						<a href="<?= $hash ?>" onclick="scrollWin(event)"><span></span>Scroll</a>
+						<img src="/public/images/<?= $img ?>">
 					</div>
 			<?php
 				}

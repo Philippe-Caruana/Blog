@@ -129,9 +129,10 @@ img {
 	height: 100vh;
 	padding: 80px 0 0 0;
 	background-attachment: fixed;
-    background-position: center;
+    /*background-position-x: 35%;
+    background-position-y: center;*/
     background-repeat: no-repeat;
-    background-size: cover;
+   	background-size: cover;
 }
 
 #parallax a {
@@ -168,6 +169,10 @@ img {
 	-webkit-animation: sdb10 2s infinite;
 	animation: sdb10 2s infinite;
 	box-sizing: border-box;
+}
+
+#parallax img {
+	display: none;
 }
 
 @keyframes sdb10 {
@@ -851,6 +856,10 @@ section #info
 		left: 0em;
 		bottom: -1em;
 	}
+	
+	.chapter {
+		flex: 0 0 100%;
+	}
 
 	#edit-articles-panel .frame div {
 		align-items: center;
@@ -887,7 +896,7 @@ section #info
 	nav {
 		position: absolute;
 		left: -100%;
-		top: 5.25em;
+		top: 5.4375em;
 		height: auto;
 		box-sizing: border-box;
 		padding: 2em 1.7em;
@@ -961,16 +970,36 @@ section #info
 	}
 
 	#parallax {
-		background-position: 35%;
+		height: auto;
+		margin: 87px 0 0 0;
+		background: none!important;
+		padding: 0;
+		/*background-position-y: 35%;
+		background-position-x: 100%;*/
 	}
-
-	#articles-container {
+	
+	#parallax a {
+		display: none;
+	}
+	
+	#parallax img {
 		display: block;
-		width: 100%;
+	}
+	
+	#chapters {
+		padding-top: 3.5em;
+	}
+	
+	.chapter {
+		margin-top: 5em;
 	}
 
 	article {
 		width: auto;
+	}
+	
+	.backlink {
+		padding: 6em 0 5em 0;
 	}
 
 	#comments {
@@ -1018,6 +1047,12 @@ section #info
 	footer {
 		display: block;
 		text-align: center;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	#articles-container {
+		width: 100%;
 	}
 }
 
